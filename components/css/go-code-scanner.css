@@ -1,0 +1,8 @@
+.go-code-scanner .command {
+	color: #999;
+	font-size: 0.8em;
+	margin: 1em 0;
+	overflow: scroll;
+	padding: 1em;
+	width: 100%;
+}
