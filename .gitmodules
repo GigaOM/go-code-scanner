@@ -1,0 +1,3 @@
+[submodule "components/external/CodeSniffer/Standards/GigaOM"]
+	path = components/external/CodeSniffer/Standards/GigaOM
+	url = git@github.com:GigaOM/gigaom-codesniffer.git
