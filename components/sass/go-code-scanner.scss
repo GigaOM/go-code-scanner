@@ -1,6 +1,6 @@
-$warning-color: #efb434;
-$error-color: #bf0900;
-$message-color: #73a8c9;
+$warning-color: #ffaa56;
+$error-color: #bf0000;
+$message-color: #56aaff;
 
 .go-code-scanner {
 	.command {
@@ -80,13 +80,15 @@ $message-color: #73a8c9;
 				text-transform: uppercase;
 
 				span {
+					border-radius: 3px;
+					color: #fff;
 					display: block; // we can't use a div because WP takes it over
 					padding: 0.3em;
+					text-shadow: 0 -1px 0 rgba( 0, 0, 0, 0.3 );
 				}
 
 				.error {
 					background: $error-color;
-					color: #fff;
 				}
 
 				.warning {
