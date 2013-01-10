@@ -16,6 +16,7 @@ License URI: http://opensource.org/licenses/mit-license.php
 
 require_once __DIR__ . '/components/class-go-code-scanner.php';
 require_once __DIR__ . '/components/class-go-code-scanner-file-filteriterator.php';
+require_once __DIR__ . '/components/class-go-code-scanner-sniff.php';
 require_once __DIR__ . '/components/functions.php';
 
 if ( is_admin() )

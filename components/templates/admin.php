@@ -187,7 +187,34 @@
 			<?php
 		}//end if
 	?>
-	<pre>
-		<?php echo $results; ?>
-	</pre>
+
+	<?php
+	if ( $results->files )
+	{
+		?>
+		<table class="wp-list-table widefat" cellspacing="0">
+			<thead>
+				<tr>
+					<th scope="col">Type</th>
+					<th scope="col">Line</th>
+					<th scope="col">Column</th>
+					<th scope="col">Message</th>
+					<th scope="col">Severity</th>
+				</tr>
+			</thead>
+			<tbody>
+			<?php
+				foreach ( $results->files as $file )
+				{
+					?>
+					
+					<?php
+				}//end foreach
+			?>
+			</tbody>
+		</table>
+		<?php
+		wp_dbug( $results );
+	}//end if
+	?>
 </div>
