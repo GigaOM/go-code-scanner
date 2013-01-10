@@ -100,36 +100,48 @@ class GO_Code_Scanner_Sniff
 		$command .= ' --report=xml';
 		$command .= ' ' . escapeshellarg( $this->base_sniff_dir . '/' . $this->target );
 
-		if ( ! ( $results = shell_exec( $command ) ) )
+		$results = trim( shell_exec( $command ) );
+
+		$doc = new DOMDocument;
+		$doc->loadXML( $results );
+
+		if ( ! $doc->getElementsByTagName( 'file' )->length )
 		{
-			return array(
-				array(
-					'name' => preg_replace( '!.*/wp-content/!', '', $this->target ),
-					'errors' => 0,
-					'warnings' => 0,
-					'results' => array(
-						'message' => array(
-							array(
-								'message' => 'The code for ' . wp_filter_nohtml_kses( $this->target ) . ' looks glorious!',
-							),
-						),
+			$data = new stdClass;
+			$data->errors = 0;
+			$data->warnings = 0;
+			$data->files = array();
+
+			$file = new stdClass;
+			$file->name = preg_replace( '!.*/wp-content/!', '', $this->target );
+			$file->errors = 0;
+			$file->warnings = 0;
+			$file->results = array(
+				'message' => array(
+					array(
+						'type' => 'message',
+						'line' => 0,
+						'column' => 0,
+						'message' => 'The code for ' . wp_filter_nohtml_kses( $this->target ) . ' looks glorious!',
+						'severity' => 0,
 					),
 				),
 			);
+
+			$data->files[] = $file;
+
+			return $data;
 		}//end if
 
-		return $this->parse_results( $results );
+		return $this->parse_results( $doc );
 	}//end execute
 
-	public function parse_results( $results )
+	public function parse_results( $doc )
 	{
 		$data = new stdClass;
 		$data->errors = 0;
 		$data->warnings = 0;
 		$data->files = array();
-
-		$doc = new DOMDocument;
-		$doc->loadXML( $results );
 
 		$files = $doc->getElementsByTagName( 'file' );
 		foreach ( $files as $file )
@@ -157,7 +169,7 @@ class GO_Code_Scanner_Sniff
 
 			foreach ( $file->childNodes as $result )
 			{
-				$result_data = new stdClass;
+				$result_data = array();
 
 				if ( ! $result->attributes )
 				{
@@ -166,10 +178,11 @@ class GO_Code_Scanner_Sniff
 
 				foreach ( $result->attributes as $attribute => $value )
 				{
-					$result_data->$attribute = $value->value;
+					$result_data[ $attribute ] = $value->value;
 				}//end foreach
 
-				$result_data->message = $result->nodeValue;
+				$result_data['message'] = $result->nodeValue;
+				$result_data['type'] = $result->nodeName;
 
 				$file_data->results[ $result->nodeName ][] = $result_data;
 			}//end foreach

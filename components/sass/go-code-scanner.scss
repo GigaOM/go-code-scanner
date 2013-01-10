@@ -1,3 +1,7 @@
+$warning-color: #efb434;
+$error-color: #bf0900;
+$message-color: #73a8c9;
+
 .go-code-scanner {
 	.command {
 		color: #999;
@@ -26,6 +30,74 @@
 		
 		select {
 			display: none;
+		}
+	}
+
+	.no-problems {
+		text-align: center;
+	}
+
+	.no-problems-results {
+		font-size: 2em;
+	}
+
+	.filename {
+		color: #999;
+		margin: 0 0 10px;
+
+		.path {
+			color: #333;
+		}
+	}
+
+	.tablenav {
+		display: none;
+	}
+
+	.file-stats {
+		float: right;
+		font-size: 1.17em;
+		margin: 0 0 10px;
+	}
+
+	.filescanresults {
+		margin-bottom: 3em;
+
+		td {
+			padding: 0.5em;
+		}
+
+		.column-type,
+		.column-column,
+		.column-line,
+		.column-severity {
+			text-align: center;
+			width: 90px;
+		}
+
+		tbody {
+			.column-type {
+				text-transform: uppercase;
+
+				span {
+					display: block; // we can't use a div because WP takes it over
+					padding: 0.3em;
+				}
+
+				.error {
+					background: $error-color;
+					color: #fff;
+				}
+
+				.warning {
+					background: $warning-color;
+				}
+
+				.message {
+					background: $message-color;
+					color: #fff;
+				}
+			}
 		}
 	}
 }
