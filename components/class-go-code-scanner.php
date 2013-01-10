@@ -34,13 +34,13 @@ class GO_Code_Scanner
 		wp_enqueue_script( 'go-code-scanner-behavior' );
 
 		wp_localize_script( 'go-code-scanner', 'go_code_scanner_selection', array(
-			'type'                                                     => isset( $_REQUEST['type'] )                                                      ? esc_js( $_REQUEST['type'] )                                                      : null,
-			'plugin'                                                   => isset( $_REQUEST['plugin'] )                                                    ? esc_js( $_REQUEST['plugin'] )                                                    : null,
-			'theme'                                                    => isset( $_REQUEST['theme'] )                                                     ? esc_js( $_REQUEST['theme'] )                                                     : null,
-			'theme-file-' . sanitize_key( $_REQUEST['theme'] )         => isset( $_REQUEST['theme-file-' . sanitize_key( $_REQUEST['theme'] ) ] )         ? esc_js( $_REQUEST['theme-file-' . sanitize_key( $_REQUEST['theme'] ) ] )         : null,
-			'vip-theme'                                                => isset( $_REQUEST['vip-theme'] )                                                 ? esc_js( $_REQUEST['vip-theme'] )                                                 : null,
-			'vip-theme-file-' . sanitize_key( $_REQUEST['vip-theme'] ) => isset( $_REQUEST['vip-theme-file-' . sanitize_key( $_REQUEST['vip-theme'] ) ] ) ? esc_js( $_REQUEST['vip-theme-file-' . sanitize_key( $_REQUEST['vip-theme'] ) ] ) : null,
-			'vip-theme-plugin'                                         => isset( $_REQUEST['vip-theme-plugin'] )                                          ? esc_js( $_REQUEST['vip-theme-plugin'] )                                          : null,
+			'type'                                                       => isset( $_REQUEST['type'] )                                                        ? esc_js( $_REQUEST['type'] )                                                        : null,
+			'plugin'                                                     => isset( $_REQUEST['plugin'] )                                                      ? esc_js( $_REQUEST['plugin'] )                                                      : null,
+			'theme'                                                      => isset( $_REQUEST['theme'] )                                                       ? esc_js( $_REQUEST['theme'] )                                                       : null,
+			'theme-file-' . sanitize_key( $_REQUEST['theme'] )           => isset( $_REQUEST['theme-file-' . sanitize_key( $_REQUEST['theme'] ) ] )           ? esc_js( $_REQUEST['theme-file-' . sanitize_key( $_REQUEST['theme'] ) ] )           : null,
+			'vip-theme'                                                  => isset( $_REQUEST['vip-theme'] )                                                   ? esc_js( $_REQUEST['vip-theme'] )                                                   : null,
+			'vip-theme-file-' . sanitize_key( $_REQUEST['vip-theme'] )   => isset( $_REQUEST['vip-theme-file-' . sanitize_key( $_REQUEST['vip-theme'] ) ] )   ? esc_js( $_REQUEST['vip-theme-file-' . sanitize_key( $_REQUEST['vip-theme'] ) ] )   : null,
+			'vip-theme-plugin-' . sanitize_key( $_REQUEST['vip-theme'] ) => isset( $_REQUEST['vip-theme-plugin-' . sanitize_key( $_REQUEST['vip-theme'] ) ] ) ? esc_js( $_REQUEST['vip-theme-plugin-' . sanitize_key( $_REQUEST['vip-theme'] ) ] ) : null,
 		));
 	}//end admin_enqueue_scripts
 
