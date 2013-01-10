@@ -2,7 +2,6 @@
 
 class GO_Code_Scanner
 {
-	public $sniffer = null;
 	public $base_sniff_dir = null;
 
 	/**
@@ -10,7 +9,6 @@ class GO_Code_Scanner
 	 */
 	public function __construct()
 	{
-		$this->sniffer = __DIR__ . '/sniff.php';
 		$this->base_sniff_dir = preg_replace( '!wp-content/.*!', 'wp-content', __DIR__ );
 
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
@@ -65,59 +63,16 @@ class GO_Code_Scanner
 		{
 			$type = sanitize_key( $_POST['type'] );
 
-			switch ( $type )
-			{
-				case 'plugin':
-					$directory = $this->sanitize_filename( $_POST['plugin'] );
-				break;
-				case 'theme':
-					$theme = $this->sanitize_filename( $_POST['theme'] );
-
-					$directory = 'themes/' . $theme;
-
-					if ( $file = $this->sanitize_filename( $_POST['theme-file-' . $theme] ) )
-					{
-						$directory .= '/' . $file;
-					}//end if
-				break;
-				case 'vip-theme':
-					$theme = $this->sanitize_filename( $_POST['vip-theme'] );
-
-					$directory = 'themes/vip/' . $theme;
-
-					if ( $file = $this->sanitize_filename( $_POST['vip-theme-file-' . $theme] ) )
-					{
-						$directory .= '/' . $file;
-					}//end if
-				break;
-				case 'vip-theme-plugin':
-					$theme = $this->sanitize_filename( $_POST['vip-theme'] );
-					$directory = 'themes/vip/' . $theme . '/plugins/' . $this->sanitize_filename( $_POST['vip-theme-plugin-' . sanitize_key( $theme )] );
-				break;
-			}//end switch
-
-			$directory = str_replace( '../', '', $directory );
-
-			if ( $directory )
-			{
-				$command = 'php ' . $this->sniffer . ' --standard=GigaOM ' . $this->base_sniff_dir . '/' . $directory;
-				if ( ! ( $results = shell_exec( $command ) ) )
-				{
-					$results = 'no-problems';
-				}//end if
-			}//end if
+			$sniff = new GO_Code_Scanner_Sniff( 'GigaOM', $type, $_POST );
+			$results = $sniff->execute();
 		}//end if
 
 		include_once __DIR__ . '/templates/admin.php';
 	}//end admin_page
 
-	public function sanitize_filename( $filename )
-	{
-		$filename = preg_replace( '/[^a-zA-Z0-9\.\/\-_]/', '', $filename );
-
-		return $filename;
-	}//end sanitize_filename
-
+	/**
+	 * grab files from a path
+	 */
 	public function files( $path )
 	{
 		$dir_path = $this->base_sniff_dir . '/' . $path;
