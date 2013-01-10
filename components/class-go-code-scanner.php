@@ -26,6 +26,12 @@ class GO_Code_Scanner
 		wp_register_style( 'go-code-scanner-admin', plugins_url( 'css/go-code-scanner.css', __FILE__ ), array(), $version );
 
 		wp_enqueue_style( 'go-code-scanner-admin' );
+
+		wp_register_script( 'go-code-scanner', plugins_url( 'js/go-code-scanner.js', __FILE__ ), array(), $version, TRUE );
+		wp_register_script( 'go-code-scanner-behavior', plugins_url( 'js/go-code-scanner-behavior.js', __FILE__ ), array(), $version, TRUE );
+
+		wp_enqueue_script( 'go-code-scanner' );
+		wp_enqueue_script( 'go-code-scanner-behavior' );
 	}//end admin_enqueue_scripts
 
 	/**
@@ -43,18 +49,64 @@ class GO_Code_Scanner
 	{
 		$command = null;
 		$results = null;
-		$directory = isset( $_REQUEST['directory'] ) ? trim( $_REQUEST['directory'], ' /' ) : null;
+		$directory = null;
 
-		$directory = str_replace( '../', '', $directory );
-
-		if ( 'POST' == $_SERVER['REQUEST_METHOD'] && $directory )
+		if ( 'POST' == $_SERVER['REQUEST_METHOD'] )
 		{
-			$command = 'php ' . $this->sniffer . ' --standard=GigaOM ' . $this->base_sniff_dir . '/' . $directory;
-			$results = shell_exec( $command );
+			$type = sanitize_key( $_POST['type'] );
+
+			switch ( $type )
+			{
+				case 'plugin':
+					$directory = $this->sanitize_filename( $_POST['plugin'] );
+				break;
+				case 'theme':
+					$theme = $this->sanitize_filename( $_POST['theme'] );
+
+					$directory = 'themes/' . $theme;
+
+					if ( $file = $this->sanitize_filename( $_POST['theme-file-' . $theme] ) )
+					{
+						$directory .= '/' . $file;
+					}//end if
+				break;
+				case 'vip-theme':
+					$theme = $this->sanitize_filename( $_POST['vip-theme'] );
+
+					$directory = 'themes/vip/' . $theme;
+
+					if ( $file = $this->sanitize_filename( $_POST['vip-theme-file-' . $theme] ) )
+					{
+						$directory .= '/' . $file;
+					}//end if
+				break;
+				case 'vip-theme-plugin':
+					$theme = $this->sanitize_filename( $_POST['vip-theme'] );
+					$directory = 'themes/vip/' . $theme . '/plugins/' . $this->sanitize_filename( $_POST['vip-theme-plugin-' . sanitize_key( $theme )] );
+				break;
+			}//end switch
+
+			$directory = str_replace( '../', '', $directory );
+
+			if ( $directory )
+			{
+				$command = 'php ' . $this->sniffer . ' --standard=GigaOM ' . $this->base_sniff_dir . '/' . $directory;
+				if ( ! ( $results = shell_exec( $command ) ) )
+				{
+					$results = 'no-problems';
+				}//end if
+			}//end if
 		}//end if
 
 		include_once __DIR__ . '/templates/admin.php';
 	}//end admin_page
+
+	public function sanitize_filename( $filename )
+	{
+		$filename = preg_replace( '/[^a-zA-Z0-9\.\/\-_]/', '', $filename );
+
+		return $filename;
+	}//end sanitize_filename
 
 	public function files( $path )
 	{
