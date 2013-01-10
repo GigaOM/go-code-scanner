@@ -189,32 +189,39 @@
 	?>
 
 	<?php
-	if ( $results->files )
+	if ( $results->files && ( $results->errors + $results->warnings ) > 0 )
+	{
+		foreach ( $results->files as $file )
+		{
+			?>
+			<p class="file-stats">
+				(errors: <?php echo $file->errors; ?>, warnings: <?php echo $file->warnings; ?>)
+			</p>
+			<h3 class="filename">
+				File: <span class="path"><?php echo $file->name; ?></span>
+			</h3>
+			<?php
+			$table = new GO_Code_Scanner_Result_Table( $file->results );
+			$table->prepare_items();
+			$table->display();
+		}//end foreach
+	}//end if
+	else
 	{
 		?>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr>
-					<th scope="col">Type</th>
-					<th scope="col">Line</th>
-					<th scope="col">Column</th>
-					<th scope="col">Message</th>
-					<th scope="col">Severity</th>
-				</tr>
-			</thead>
-			<tbody>
-			<?php
-				foreach ( $results->files as $file )
-				{
-					?>
-					
-					<?php
-				}//end foreach
-			?>
-			</tbody>
-		</table>
+		<div class="no-problems">
+			<p>
+				<?php
+					$file = array_pop( $results->files );
+					echo 'I just scanned <code>' . wp_filter_nohtml_kses( $file->name ) . '</code> and...';
+				?>
+			</p>
+
+			<p class="no-problems-results">
+				The code looks glorious!
+			</p>
+		</div>
 		<?php
-		wp_dbug( $results );
-	}//end if
+	}//end else
 	?>
 </div>
