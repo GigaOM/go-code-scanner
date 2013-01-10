@@ -33,6 +33,12 @@ var go_code_scanner = {
 		$(document).on( 'change', '#go-code-scanner-theme', function( e ) {
 			go_code_scanner.select_theme( $(this), 'theme' );
 		});
+
+		for ( var item in go_code_scanner_selection ) {
+			if ( go_code_scanner_selection[ item ] ) {
+				$('select[name="' + item + '"]').val( go_code_scanner_selection[ item ] ).change();
+			}//end if
+		}//end for
 	};
 
 	go_code_scanner.select_type = function( e ) {
