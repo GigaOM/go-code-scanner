@@ -31,15 +31,25 @@ class GO_Code_Scanner
 		wp_enqueue_script( 'go-code-scanner' );
 		wp_enqueue_script( 'go-code-scanner-behavior' );
 
-		wp_localize_script( 'go-code-scanner', 'go_code_scanner_selection', array(
+		$data = array(
 			'type'                                                       => isset( $_REQUEST['type'] )                                                        ? esc_js( $_REQUEST['type'] )                                                        : null,
 			'plugin'                                                     => isset( $_REQUEST['plugin'] )                                                      ? esc_js( $_REQUEST['plugin'] )                                                      : null,
 			'theme'                                                      => isset( $_REQUEST['theme'] )                                                       ? esc_js( $_REQUEST['theme'] )                                                       : null,
-			'theme-file-' . sanitize_key( $_REQUEST['theme'] )           => isset( $_REQUEST['theme-file-' . sanitize_key( $_REQUEST['theme'] ) ] )           ? esc_js( $_REQUEST['theme-file-' . sanitize_key( $_REQUEST['theme'] ) ] )           : null,
 			'vip-theme'                                                  => isset( $_REQUEST['vip-theme'] )                                                   ? esc_js( $_REQUEST['vip-theme'] )                                                   : null,
-			'vip-theme-file-' . sanitize_key( $_REQUEST['vip-theme'] )   => isset( $_REQUEST['vip-theme-file-' . sanitize_key( $_REQUEST['vip-theme'] ) ] )   ? esc_js( $_REQUEST['vip-theme-file-' . sanitize_key( $_REQUEST['vip-theme'] ) ] )   : null,
-			'vip-theme-plugin-' . sanitize_key( $_REQUEST['vip-theme'] ) => isset( $_REQUEST['vip-theme-plugin-' . sanitize_key( $_REQUEST['vip-theme'] ) ] ) ? esc_js( $_REQUEST['vip-theme-plugin-' . sanitize_key( $_REQUEST['vip-theme'] ) ] ) : null,
-		));
+		);
+
+		if ( isset( $_REQUEST['theme'] ) )
+		{
+			$data['theme-file-' . sanitize_key( $_REQUEST['theme'] )] = isset( $_REQUEST['theme-file-' . sanitize_key( $_REQUEST['theme'] ) ] ) ? esc_js( $_REQUEST['theme-file-' . sanitize_key( $_REQUEST['theme'] ) ] ) : null;
+		}//end if
+
+		if ( isset( $_REQUEST['vip-theme'] ) )
+		{
+			$data['vip-theme-file-' . sanitize_key( $_REQUEST['vip-theme'] )] = isset( $_REQUEST['vip-theme-file-' . sanitize_key( $_REQUEST['vip-theme'] ) ] ) ? esc_js( $_REQUEST['vip-theme-file-' . sanitize_key( $_REQUEST['vip-theme'] ) ] ) : null;
+			$data['vip-theme-plugin-' . sanitize_key( $_REQUEST['vip-theme'] )] = isset( $_REQUEST['vip-theme-plugin-' . sanitize_key( $_REQUEST['vip-theme'] ) ] ) ? esc_js( $_REQUEST['vip-theme-plugin-' . sanitize_key( $_REQUEST['vip-theme'] ) ] ) : null;
+		}//end if
+
+		wp_localize_script( 'go-code-scanner', 'go_code_scanner_selection', $data );
 	}//end admin_enqueue_scripts
 
 	/**
