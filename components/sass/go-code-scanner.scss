@@ -1,0 +1,31 @@
+.go-code-scanner {
+	.command {
+		color: #999;
+		font-size: 0.8em;
+		margin: 1em 0;
+		overflow: scroll;
+		padding: 1em;
+		width: 100%;
+	}
+
+	.go-code-scanner-type {
+		display: none;
+	}
+
+	.file,
+	.vip-theme-plugin-selection {
+		display: none;
+	}
+
+	.note {
+		color: #999;
+	}
+
+	.files {
+		display: none;
+		
+		select {
+			display: none;
+		}
+	}
+}
