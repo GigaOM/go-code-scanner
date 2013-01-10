@@ -189,39 +189,42 @@
 	?>
 
 	<?php
-	if ( $results->files && ( $results->errors + $results->warnings ) > 0 )
+	if ( $results )
 	{
-		foreach ( $results->files as $file )
+		if ( $results->files && ( $results->errors + $results->warnings ) > 0 )
+		{
+			foreach ( $results->files as $file )
+			{
+				?>
+				<p class="file-stats">
+					(errors: <?php echo $file->errors; ?>, warnings: <?php echo $file->warnings; ?>)
+				</p>
+				<h3 class="filename">
+					File: <code class="path"><?php echo $file->name; ?></code>
+				</h3>
+				<?php
+				$table = new GO_Code_Scanner_Result_Table( $file->results );
+				$table->prepare_items();
+				$table->display();
+			}//end foreach
+		}//end if
+		else
 		{
 			?>
-			<p class="file-stats">
-				(errors: <?php echo $file->errors; ?>, warnings: <?php echo $file->warnings; ?>)
-			</p>
-			<h3 class="filename">
-				File: <span class="path"><?php echo $file->name; ?></span>
-			</h3>
-			<?php
-			$table = new GO_Code_Scanner_Result_Table( $file->results );
-			$table->prepare_items();
-			$table->display();
-		}//end foreach
-	}//end if
-	else
-	{
-		?>
-		<div class="no-problems">
-			<p>
-				<?php
-					$file = array_pop( $results->files );
-					echo 'I just scanned <code>' . wp_filter_nohtml_kses( $file->name ) . '</code> and...';
-				?>
-			</p>
+			<div class="no-problems">
+				<p>
+					<?php
+						$file = array_pop( $results->files );
+						echo 'I just scanned <code>' . wp_filter_nohtml_kses( $file->name ) . '</code> and...';
+					?>
+				</p>
 
-			<p class="no-problems-results">
-				The code looks glorious!
-			</p>
-		</div>
-		<?php
-	}//end else
+				<p class="no-problems-results">
+					The code looks glorious!
+				</p>
+			</div>
+			<?php
+		}//end else
+	}//end if
 	?>
 </div>
