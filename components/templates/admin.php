@@ -200,6 +200,53 @@
 	<?php
 	if ( $results )
 	{
+		?>
+		<h3>
+			Scanning: <code><?php echo $target; ?></code>
+		</h3>
+		<table class="wp-list-table widefat summary">
+			<tbody>
+				<tr valign="middle">
+					<th scope="row">
+						Test Results:
+					</th>
+					<td>
+						<?php
+							if ( $results->errors )
+							{
+								?><div class="result result-fail">Fail</div><?php
+							}//end if
+							elseif ( $results->warnings )
+							{
+								?><div class="result result-sorta">Sorta-Pass</div><?php
+							}//end elseif
+							else
+							{
+								?><div class="result result-pass">Pass</div><?php
+							}//end else
+						?>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">
+						Errors:
+					</th>
+					<td>
+						<?php echo intval( $results->errors ); ?>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">
+						Warnings:
+					</th>
+					<td>
+						<?php echo intval( $results->warnings ); ?>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<?php
+
 		if ( $results->files && ( $results->errors + $results->warnings ) > 0 )
 		{
 			foreach ( $results->files as $file )
@@ -226,23 +273,6 @@
 				}//end if
 			}//end foreach
 		}//end if
-		else
-		{
-			?>
-			<div class="no-problems">
-				<p>
-					<?php
-						$file = array_pop( $results->files );
-						echo 'I just scanned <code>' . wp_filter_nohtml_kses( $file->name ) . '</code> and...';
-					?>
-				</p>
-
-				<p class="no-problems-results">
-					The code looks glorious!
-				</p>
-			</div>
-			<?php
-		}//end else
 	}//end if
 	?>
 </div>
