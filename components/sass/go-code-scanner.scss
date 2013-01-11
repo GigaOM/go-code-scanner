@@ -25,6 +25,18 @@ $message-color: #56aaff;
 		color: #999;
 	}
 
+	th {
+		label:after {
+			content: ':';
+		}
+	}
+
+	td {
+		label {
+			margin-right: 1.5em;
+		}
+	}
+
 	.files {
 		display: none;
 		
