@@ -65,12 +65,17 @@ class GO_Code_Scanner
 	 */
 	public function admin_page()
 	{
-		$command = null;
-		$results = null;
-		$directory = null;
+		$command       = null;
+		$results       = null;
+		$directory     = null;
+		$show_errors   = 1;
+		$show_warnings = 1;
 
 		if ( 'POST' == $_SERVER['REQUEST_METHOD'] )
 		{
+			$show_errors   = isset( $_POST['show-errors'] ) ? $_POST['show-errors'] : 0;
+			$show_warnings = isset( $_POST['show-warnings'] ) ? $_POST['show-warnings'] : 0;
+
 			$type = sanitize_key( $_POST['type'] );
 
 			$sniff = new GO_Code_Scanner_Sniff( 'GigaOM', $type, $_POST );

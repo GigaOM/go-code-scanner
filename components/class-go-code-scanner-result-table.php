@@ -2,12 +2,34 @@
 
 class GO_Code_Scanner_Result_Table extends WP_List_Table
 {
+	public $args    = array();
 	public $results = array();
 
 	/**
 	 * constructor
 	 */
-	public function __construct( $results )
+	public function __construct( $results, $args = array() )
+	{
+		$defaults = array(
+			'show-errors'   => true,
+			'show-warnings' => true,
+		);
+
+		$this->args = wp_parse_args( $args, $defaults );
+
+		$this->parse_results( $results );
+
+		parent::__construct( array(
+			'singular' => 'file scan result',
+			'plural'   => 'file scan results',
+			'ajax'     => false,
+		));
+	}//end __construct
+
+	/**
+	 * parse results array into object property
+	 */
+	public function parse_results( $results )
 	{
 		if ( isset( $results['error'] ) )
 		{
@@ -23,13 +45,7 @@ class GO_Code_Scanner_Result_Table extends WP_List_Table
 		{
 			$this->results = array_merge( $this->results, $results['message'] );
 		}//end if
-
-		parent::__construct( array(
-			'singular' => 'file scan result',
-			'plural' => 'file scan results',
-			'ajax' => false,
-		));
-	}//end __construct
+	}//end parse_results
 
 	/**
 	 * failover column function.  If a column output isn't defined, this will dump the contents
@@ -110,6 +126,23 @@ class GO_Code_Scanner_Result_Table extends WP_List_Table
 		);
 
 		$data = $this->results;
+
+		// filter out errors and warnings if we need to
+		if ( ! $this->args['show-errors'] || ! $this->args['show-warnings'] )
+		{
+			foreach ( $data as $index => $row )
+			{
+				if ( ! $this->args['show-errors'] && 'error' == $row['type'] )
+				{
+					unset( $data[ $index ] );
+				}//end if
+
+				if ( ! $this->args['show-warnings'] && 'warning' == $row['type'] )
+				{
+					unset( $data[ $index ] );
+				}//end if
+			}//end foreach
+		}//end if
 
 		usort( $data, function( $a, $b ) {
 			$orderby = isset( $_REQUEST['orderby'] ) && $_REQUEST['orderby'] ? $_REQUEST['orderby'] : 'type';

@@ -173,6 +173,15 @@
 						?>
 					</td>
 				</tr>
+				<tr valign="top">
+					<th scope="row">
+						<label for="go-code-scanner-type-filter">Show</label>
+					</th>
+					<td>
+						<input type="checkbox" name="show-errors" id="show-errors" value="1" <?php checked( $show_errors ); ?>/> <label for="show-errors">Errors</label>
+						<input type="checkbox" name="show-warnings" id="show-warnings" value="1" <?php checked( $show_warnings ); ?>/> <label for="show-warnings">Warnings</label>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 		<p class="submit">
@@ -203,9 +212,18 @@
 					File: <code class="path"><?php echo $file->name; ?></code>
 				</h3>
 				<?php
-				$table = new GO_Code_Scanner_Result_Table( $file->results );
-				$table->prepare_items();
-				$table->display();
+				// only show the table if there are warnings/errors that we want to see
+				if ( ( $file->errors * $show_errors + $file->warnings * $show_warnings ) > 0 )
+				{
+					$args = array(
+						'show-errors'   => $show_errors,
+						'show-warnings' => $show_warnings,
+					);
+
+					$table = new GO_Code_Scanner_Result_Table( $file->results, $args );
+					$table->prepare_items();
+					$table->display();
+				}//end if
 			}//end foreach
 		}//end if
 		else
