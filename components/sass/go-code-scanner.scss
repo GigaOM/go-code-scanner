@@ -1,6 +1,7 @@
 $warning-color: #ffaa56;
 $error-color: #bf0000;
 $message-color: #56aaff;
+$success-color: #007f00;
 
 .go-code-scanner {
 	.command {
@@ -42,6 +43,43 @@ $message-color: #56aaff;
 		
 		select {
 			display: none;
+		}
+	}
+
+	.summary {
+		width: 300px;
+		margin-bottom: 3em;
+
+		th {
+			text-align: left;
+		}
+
+		td {
+			text-align: center;
+			vertical-align: middle;
+		}
+
+		.result {
+			border-radius: 3px;
+			color: #fff;
+			margin: 0 auto;
+			padding: 0.5em;
+			text-align: center;
+			text-shadow: 0 -1px 0 rgba( 0, 0, 0, 0.3 );
+			text-transform: uppercase;
+			width: 100px;
+		}
+
+		.result-fail {
+			background-color: $error-color;
+		}
+		
+		.result-sorta {
+			background-color: $warning-color;
+		}
+
+		.result-pass {
+			background-color: $success-color;
 		}
 	}
 

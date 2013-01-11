@@ -80,6 +80,7 @@ class GO_Code_Scanner
 
 			$sniff = new GO_Code_Scanner_Sniff( 'GigaOM', $type, $_POST );
 			$results = $sniff->execute();
+			$target = $sniff->target;
 		}//end if
 
 		include_once __DIR__ . '/templates/admin.php';
