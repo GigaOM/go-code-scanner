@@ -94,6 +94,20 @@ class GO_Code_Scanner
 
 		$dir = new DirectoryIterator( $dir_path );
 
-		return new GO_Code_Scanner_File_FilterIterator( $dir );
+		$files = new GO_Code_Scanner_File_FilterIterator( $dir );
+		$all_files = array();
+
+		foreach ( $files as $file )
+		{
+			$file_data = new stdClass;
+			$file_data->name = $file->getFilename();
+			$file_data->is_dir = $file->isDir();
+
+			$all_files[ $file_data->name ] = $file_data;
+		}//end foreach
+
+		ksort( $all_files );
+
+		return $all_files;
 	}//end files
 }//end class
