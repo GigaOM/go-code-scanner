@@ -29,14 +29,14 @@
 							foreach ( $this->files( 'plugins' ) as $file )
 							{
 								?>
-								<option value="plugins/<?php echo esc_attr( $file->getFilename() ); ?>">plugins/<?php echo esc_attr( $file->getFilename() ); ?></option>
+								<option value="plugins/<?php echo esc_attr( $file->name ); ?>">plugins/<?php echo esc_attr( $file->name ); ?></option>
 								<?php
 							}//end foreach
 
 							foreach ( $this->files( 'mu-plugins' ) as $file )
 							{
 								?>
-								<option value="mu-plugins/<?php echo esc_attr( $file->getFilename() ); ?>">mu-plugins/<?php echo esc_attr( $file->getFilename() ); ?></option>
+								<option value="mu-plugins/<?php echo esc_attr( $file->name ); ?>">mu-plugins/<?php echo esc_attr( $file->name ); ?></option>
 								<?php
 							}//end foreach
 							?>
@@ -54,7 +54,7 @@
 							foreach ( $this->files( 'themes' ) as $file )
 							{
 								?>
-								<option value="<?php echo esc_attr( $file->getFilename() ); ?>"><?php echo esc_attr( $file->getFilename() ); ?></option>
+								<option value="<?php echo esc_attr( $file->name ); ?>"><?php echo esc_attr( $file->name ); ?></option>
 								<?php
 							}//end foreach
 							?>
@@ -70,18 +70,18 @@
 						<?php
 						foreach ( $this->files( 'themes' ) as $dir )
 						{
-							if ( ! $dir->isDir() )
+							if ( ! $dir->is_dir )
 							{
 								continue;
 							}//end if
 							?>
-							<select name="theme-file-<?php echo sanitize_key( $dir->getFilename() ); ?>" class="file <?php echo sanitize_key( $dir->getFilename() ); ?>">
+							<select name="theme-file-<?php echo sanitize_key( $dir->name ); ?>" class="file <?php echo sanitize_key( $dir->name ); ?>">
 								<option value="">&raquo; Select File</option>
 								<?php
-								foreach ( $this->files( 'themes/' . $dir->getFilename() ) as $file )
+								foreach ( $this->files( 'themes/' . $dir->name ) as $file )
 								{
 									?>
-									<option value="<?php echo esc_attr( $file->getFilename() ); ?>"><?php echo esc_attr( $file->getFilename() ); ?></option>
+									<option value="<?php echo esc_attr( $file->name ); ?>"><?php echo esc_attr( $file->name ); ?></option>
 									<?php
 								}//end foreach
 								?>
@@ -102,7 +102,7 @@
 							foreach ( $this->files( 'themes/vip' ) as $file )
 							{
 								?>
-								<option value="<?php echo esc_attr( $file->getFilename() ); ?>"><?php echo esc_attr( $file->getFilename() ); ?></option>
+								<option value="<?php echo esc_attr( $file->name ); ?>"><?php echo esc_attr( $file->name ); ?></option>
 								<?php
 							}//end foreach
 							?>
@@ -118,18 +118,18 @@
 						<?php
 						foreach ( $this->files( 'themes/vip' ) as $dir )
 						{
-							if ( ! $dir->isDir() )
+							if ( ! $dir->is_dir )
 							{
 								continue;
 							}//end if
 							?>
-							<select name="vip-theme-file-<?php echo sanitize_key( $dir->getFilename() ); ?>" class="file <?php echo sanitize_key( $dir->getFilename() ); ?>">
+							<select name="vip-theme-file-<?php echo sanitize_key( $dir->name ); ?>" class="file <?php echo sanitize_key( $dir->name ); ?>">
 								<option value="">&raquo; Select File</option>
 								<?php
-								foreach ( $this->files( 'themes/vip/' . $dir->getFilename() ) as $file )
+								foreach ( $this->files( 'themes/vip/' . $dir->name ) as $file )
 								{
 									?>
-									<option value="<?php echo esc_attr( $file->getFilename() ); ?>"><?php echo esc_attr( $file->getFilename() ); ?></option>
+									<option value="<?php echo esc_attr( $file->name ); ?>"><?php echo esc_attr( $file->name ); ?></option>
 									<?php
 								}//end foreach
 								?>
@@ -148,21 +148,21 @@
 						<?php
 							foreach ( $this->files( 'themes/vip' ) as $dir )
 							{
-								if ( ! $dir->isDir() )
+								if ( ! $dir->is_dir )
 								{
 									continue;
 								}//end if
 
-								if ( 'EmptyIterator' != get_class( $this->files( 'themes/vip/' . $dir->getFilename() . '/plugins' ) ) )
+								if ( is_array( $this->files( 'themes/vip/' . $dir->name . '/plugins' ) ) )
 								{
 									?>
-									<select name="vip-theme-plugin-<?php echo sanitize_key( $dir->getFilename() ); ?>" id="go-code-scanner-vip-theme-plugin" class="vip-theme-plugin-selection <?php echo sanitize_key( $dir->getFilename() ); ?>">
+									<select name="vip-theme-plugin-<?php echo sanitize_key( $dir->name ); ?>" id="go-code-scanner-vip-theme-plugin" class="vip-theme-plugin-selection <?php echo sanitize_key( $dir->name ); ?>">
 										<option value="">&raquo; Select Plugin</option>
 										<?php
-										foreach ( $this->files( 'themes/vip/' . $dir->getFilename() . '/plugins' ) as $file )
+										foreach ( $this->files( 'themes/vip/' . $dir->name . '/plugins' ) as $file )
 										{
 											?>
-											<option value="<?php echo esc_attr( $file->getFilename() ); ?>"><?php echo esc_attr( $file->getFilename() ); ?></option>
+											<option value="<?php echo esc_attr( $file->name ); ?>"><?php echo esc_attr( $file->name ); ?></option>
 											<?php
 										}//end foreach
 										?>
