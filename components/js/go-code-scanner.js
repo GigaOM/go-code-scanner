@@ -61,6 +61,9 @@ var go_code_scanner = {
 	 */
 	go_code_scanner.hide_types = function() {
 		for ( var section in go_code_scanner.types ) {
+            if( !$('.' + section ).hide().find('select').length )
+                continue;
+
 			$('.' + section ).hide().find('select')[0].selectedIndex = 0;
 			$('.' + section ).find('.note').show();
 		}//end for
