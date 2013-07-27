@@ -26,7 +26,6 @@
 							<option value="plugin">Plugin</option>
 							<option value="theme">Theme File/Directory</option>
 							<option value="vip-theme">VIP Theme</option>
-							<option value="vip-theme-plugin">VIP Theme Plugin</option>
 						</select>
 					</td>
 				</tr>
