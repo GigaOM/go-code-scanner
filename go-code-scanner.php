@@ -10,8 +10,8 @@ Contributors: borkweb, zbtirrell
 Tags: standards
 Tested up to: 3.4.1
 Stable tag: 3.4
-License: MIT
-License URI: http://opensource.org/licenses/mit-license.php
+License: GPLv2
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 if( ! class_exists('WP_List_Table') )
