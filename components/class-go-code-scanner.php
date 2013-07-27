@@ -58,7 +58,7 @@ class GO_Code_Scanner
 	 */
 	public function admin_menu()
 	{
-		add_submenu_page( 'tools.php', 'GO Code Scanner', 'GO Code Scanner', 'manage_options', 'go-code-scanner', array( $this, 'admin_page' ) );
+		add_submenu_page( 'tools.php', 'Code Scanner', 'Code Scanner', 'manage_options', 'go-code-scanner', array( $this, 'admin_page' ) );
 	}//end admin_menu
 
 	/**
