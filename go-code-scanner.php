@@ -3,7 +3,7 @@
 Plugin Name: GigaOM Code Scanner
 Version: 0.1
 Plugin URI: http://gigaom.com
-Description: Scan theme/plugin code for GigaOM standards
+Description: Scan theme/plugin code for standards compliance
 Author: GigaOM
 Author URI: http://gigaom.com
 Contributors: borkweb, zbtirrell
