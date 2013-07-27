@@ -71,7 +71,7 @@ class GO_Code_Scanner
 		$directory     = null;
 		$show_errors   = 1;
 		$show_warnings = 1;
-		$standards     = get_option( $this->standards_options, 'WordPress' );
+		$standards     = get_option( $this->standards_option, 'WordPress' );
 
 		if ( 'POST' == $_SERVER['REQUEST_METHOD'] )
 		{
@@ -81,7 +81,7 @@ class GO_Code_Scanner
 			if ( isset( $_POST['standards'] ) && $standards != $_POST['standards'] )
 			{
 				$standards = esc_attr( $_POST['standards'] );
-				update_option( $this->standards_options, $standards );
+				update_option( $this->standards_option, $standards );
 			}//end if
 
 			$type = sanitize_key( $_POST['type'] );
