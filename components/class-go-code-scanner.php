@@ -32,10 +32,10 @@ class GO_Code_Scanner
 		wp_enqueue_script( 'go-code-scanner-behavior' );
 
 		$data = array(
-			'type'                                                       => isset( $_REQUEST['type'] )                                                        ? esc_js( $_REQUEST['type'] )                                                        : null,
-			'plugin'                                                     => isset( $_REQUEST['plugin'] )                                                      ? esc_js( $_REQUEST['plugin'] )                                                      : null,
-			'theme'                                                      => isset( $_REQUEST['theme'] )                                                       ? esc_js( $_REQUEST['theme'] )                                                       : null,
-			'vip-theme'                                                  => isset( $_REQUEST['vip-theme'] )                                                   ? esc_js( $_REQUEST['vip-theme'] )                                                   : null,
+			'type' => isset( $_REQUEST['type'] ) ? esc_js( $_REQUEST['type'] ) : null,
+			'plugin' => isset( $_REQUEST['plugin'] ) ? esc_js( $_REQUEST['plugin'] ) : null,
+			'theme' => isset( $_REQUEST['theme'] ) ? esc_js( $_REQUEST['theme'] ) : null,
+			'vip-theme' => isset( $_REQUEST['vip-theme'] )? esc_js( $_REQUEST['vip-theme'] ) : null,
 		);
 
 		if ( isset( $_REQUEST['theme'] ) )
