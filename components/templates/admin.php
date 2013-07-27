@@ -6,6 +6,18 @@
 			<tbody>
 				<tr valign="top">
 					<th scope="row">
+						<label for="go-code-scanner-standards">Standards</label>
+					</th>
+					<td>
+						<select name="standards" id="go-code-scanner-standards">
+							<option value="">&raquo; Select Standards</option>
+							<option value="WordPress" <?php selected( $standards, 'WordPress' ); ?>>WordPress</option>
+							<option value="GigaOM" <?php selected( $standards, 'GigaOM' ); ?>>GigaOM</option>
+						</select>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">
 						<label for="go-code-scanner-type">What type of file/directory?</label>
 					</th>
 					<td>

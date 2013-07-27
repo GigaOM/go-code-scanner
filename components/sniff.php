@@ -4,7 +4,7 @@
  * This sniff file is based on the phpcs pear executable PHP file created by squiz.net
  */
 
-error_reporting(E_ALL | E_STRICT);
+error_reporting( E_ALL | E_STRICT );
 
 require_once __DIR__ . '/external/CodeSniffer/CLI.php';
 

@@ -2,6 +2,7 @@
 
 class GO_Code_Scanner
 {
+	public $standards_option = 'go-code-scanner-standards';
 	public $base_sniff_dir = null;
 
 	/**
@@ -70,15 +71,22 @@ class GO_Code_Scanner
 		$directory     = null;
 		$show_errors   = 1;
 		$show_warnings = 1;
+		$standards     = get_option( $this->standards_options, 'WordPress' );
 
 		if ( 'POST' == $_SERVER['REQUEST_METHOD'] )
 		{
 			$show_errors   = isset( $_POST['show-errors'] ) ? $_POST['show-errors'] : 0;
 			$show_warnings = isset( $_POST['show-warnings'] ) ? $_POST['show-warnings'] : 0;
 
+			if ( isset( $_POST['standards'] ) && $standards != $_POST['standards'] )
+			{
+				$standards = esc_attr( $_POST['standards'] );
+				update_option( $this->standards_options, $standards );
+			}//end if
+
 			$type = sanitize_key( $_POST['type'] );
 
-			$sniff = new GO_Code_Scanner_Sniff( 'GigaOM', $type, $_POST );
+			$sniff = new GO_Code_Scanner_Sniff( $standards, $type, $_POST );
 			$results = $sniff->execute();
 			$target = $sniff->target;
 		}//end if
