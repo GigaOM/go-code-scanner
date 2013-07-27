@@ -1,6 +1,15 @@
 # GigaOM Code Scanner
 A WordPress plugin for scanning code for standards/convention errors
 
+## Before you clone!
+
+Since this repository includes external code, you'll want to clone this recursively:
+
+````
+git clone --recursive git@github.com:GigaOM/go-code-scanner.git
+````
+
+## Screenshot!
 ![go-code-scanner screenshot](http://borkweb.com/wp-content/uploads/2013/07/go-code-scanner.png)
 
 ## Credits
