@@ -77,6 +77,8 @@ class GO_Code_Scanner_Sniff
 
 	/**
 	 * make sure the filename is legit
+	 *
+	 * @param $filename string to sanitize
 	 */
 	public function sanitize_filename( $filename )
 	{
@@ -136,6 +138,11 @@ class GO_Code_Scanner_Sniff
 		return $this->parse_results( $doc );
 	}//end execute
 
+	/**
+	 * parse results of codesniff
+	 *
+	 * @param $doc DOMDocument to parse data from
+	 */
 	public function parse_results( $doc )
 	{
 		$data = new stdClass;

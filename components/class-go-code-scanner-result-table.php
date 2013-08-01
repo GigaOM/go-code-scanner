@@ -28,6 +28,8 @@ class GO_Code_Scanner_Result_Table extends WP_List_Table
 
 	/**
 	 * parse results array into object property
+	 *
+	 * @param $results array() to parse into object property
 	 */
 	public function parse_results( $results )
 	{
