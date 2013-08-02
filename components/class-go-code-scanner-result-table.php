@@ -52,8 +52,8 @@ class GO_Code_Scanner_Result_Table extends WP_List_Table
 	/**
 	 * failover column function.  If a column output isn't defined, this will dump the contents
 	 *
-     * @param $column_name string and $item string
-     *
+	 * @param $column_name string and $item string
+	 *
 	 * @return $column_name string and $item string to associate with it
 	 */
 	public function column_default( $item, $column_name )
