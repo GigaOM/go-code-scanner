@@ -51,12 +51,21 @@ class GO_Code_Scanner_Result_Table extends WP_List_Table
 
 	/**
 	 * failover column function.  If a column output isn't defined, this will dump the contents
+	 *
+	 * @param $column_name string and $item string
+	 *
+	 * @return $column_name string and $item string to associate with it
 	 */
 	public function column_default( $item, $column_name )
 	{
 		return $column_name . ': ' .print_r( $item, TRUE );
 	}//end column_default
 
+	/**
+	 * retrieve column information
+	 *
+	 * @return $columns array() of collected columns
+	 */
 	public function get_columns()
 	{
 		$columns = array(
@@ -70,6 +79,11 @@ class GO_Code_Scanner_Result_Table extends WP_List_Table
 		return $columns;
 	}//end get_columns
 
+	/**
+	 * retrieve sortable columns
+	 *
+	 * @return $sortable_columns array() of columns for sorting
+	 */
 	public function get_sortable_columns()
 	{
 		// @TODO: implement sorting in class-go-code-scanner
