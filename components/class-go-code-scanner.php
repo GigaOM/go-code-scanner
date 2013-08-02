@@ -98,6 +98,8 @@ class GO_Code_Scanner
 	 * grab files from a path
 	 *
 	 * @param $path string file $path to access
+	 *
+	 * @return files located at $path
 	 */
 	public function files( $path )
 	{
