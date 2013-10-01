@@ -1,10 +1,10 @@
 <?php
 /*
-Plugin Name: GigaOM Code Scanner
+Plugin Name: Gigaom Code Scanner
 Version: 0.1
 Plugin URI: http://gigaom.com
 Description: Scan theme/plugin code for standards compliance
-Author: GigaOM
+Author: Gigaom
 Author URI: http://gigaom.com
 Contributors: borkweb, zbtirrell
 Tags: standards
