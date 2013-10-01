@@ -1,6 +1,6 @@
 <div class="wrap go-code-scanner">
 	<?php screen_icon('tools'); ?>
-	<h2>GigaOM Code Scanner</h2>
+	<h2>Gigaom Code Scanner</h2>
 	<form method="POST">
 		<table class="form-table">
 			<tbody>
@@ -12,7 +12,7 @@
 						<select name="standards" id="go-code-scanner-standards">
 							<option value="">&raquo; Select Standards</option>
 							<option value="WordPress" <?php selected( $standards, 'WordPress' ); ?>>WordPress</option>
-							<option value="GigaOM" <?php selected( $standards, 'GigaOM' ); ?>>GigaOM</option>
+							<option value="Gigaom" <?php selected( $standards, 'Gigaom' ); ?>>Gigaom</option>
 						</select>
 					</td>
 				</tr>
